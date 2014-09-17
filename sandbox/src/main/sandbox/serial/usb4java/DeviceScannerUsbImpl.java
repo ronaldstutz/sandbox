@@ -1,5 +1,8 @@
 package sandbox.serial.usb4java;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.usb.UsbDevice;
 import javax.usb.UsbHostManager;
 import javax.usb.UsbServices;
@@ -12,6 +15,8 @@ import sandbox.serial.common.SerialDevice;
 public class DeviceScannerUsbImpl extends AbstractDeviceScanner implements UsbServicesListener {
 
     private volatile static DeviceScannerUsbImpl singletonInstance;
+
+    private final Map<UsbDevice, SerialDevice>   attachedDevicesMap = new HashMap<UsbDevice, SerialDevice>();
 
     public static DeviceScannerUsbImpl getSingletonInstance() {
         if (null == singletonInstance) {
@@ -41,7 +46,11 @@ public class DeviceScannerUsbImpl extends AbstractDeviceScanner implements UsbSe
     public void usbDeviceAttached(final UsbServicesEvent event) {
         final UsbDevice usbDevice=event.getUsbDevice();
         if (!usbDevice.isUsbHub()) {
-            super.deviceAttached(new SerialDevice(getIdentifier(usbDevice)));
+            if (!attachedDevicesMap.containsKey(usbDevice)) {
+                final SerialDevice serialDevice = new SerialDevice(getIdentifier(usbDevice));
+                attachedDevicesMap.put(usbDevice, serialDevice);
+                super.deviceAttached(serialDevice);
+            }
         }
     }
 
@@ -49,7 +58,8 @@ public class DeviceScannerUsbImpl extends AbstractDeviceScanner implements UsbSe
     public void usbDeviceDetached(final UsbServicesEvent event) {
         final UsbDevice usbDevice=event.getUsbDevice();
         if (!usbDevice.isUsbHub()) {
-            super.deviceDetached(new SerialDevice(getIdentifier(usbDevice)));
+            final SerialDevice serialDevice = attachedDevicesMap.remove(usbDevice);
+            super.deviceDetached(serialDevice);
         }
     }
 
