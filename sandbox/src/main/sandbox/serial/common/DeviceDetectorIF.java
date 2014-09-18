@@ -1,5 +1,5 @@
 package sandbox.serial.common;
 
-public interface DeviceScannerIF {
+public interface DeviceDetectorIF {
     public String getType();
 }

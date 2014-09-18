@@ -3,12 +3,12 @@ package sandbox.serial.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDeviceScanner implements DeviceScannerIF {
+public class AbstractDeviceDetector implements DeviceDetectorIF {
     private final String type;
 
-    List<DeviceScannerListenerIF> listeners = new ArrayList<DeviceScannerListenerIF>();
+    List<DeviceDetectorListenerIF> listeners = new ArrayList<DeviceDetectorListenerIF>();
 
-    public AbstractDeviceScanner(final String type) {
+    public AbstractDeviceDetector(final String type) {
         this.type = type;
     }
 
@@ -17,25 +17,25 @@ public class AbstractDeviceScanner implements DeviceScannerIF {
         return type;
     }
 
-    public void addListener(final DeviceScannerListenerIF listener) {
+    public void addListener(final DeviceDetectorListenerIF listener) {
         if (listeners.contains(listener)) {
             return;
         }
         listeners.add(listener);
     }
 
-    public void removeListener(final DeviceScannerListenerIF listener) {
+    public void removeListener(final DeviceDetectorListenerIF listener) {
         listeners.remove(listener);
     }
 
     protected void deviceAttached(final SerialDevice device) {
-        for (final DeviceScannerListenerIF listener : listeners) {
+        for (final DeviceDetectorListenerIF listener : listeners) {
             listener.deviceAttached(device);
         }
     }
 
     protected void deviceDetached(final SerialDevice device) {
-        for (final DeviceScannerListenerIF listener : listeners) {
+        for (final DeviceDetectorListenerIF listener : listeners) {
             listener.deviceDetached(device);
         }
     }

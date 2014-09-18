@@ -10,18 +10,18 @@ public class DeviceSupervisor implements Runnable, SerialDeviceListenerIF {
     @Override
     public void deviceAttached(final SerialDevice device) {
         System.out.println("+++ Device Attached: " + device.getIdentifier() + device);
-        SerialDeviceManager.getSingletonInstance().dumpDevices();
+        DeviceManager.getSingletonInstance().dumpDevices();
     }
 
     @Override
     public void deviceDetached(final SerialDevice device) {
-        System.out.println("+++ Device Detached: " + device.getIdentifier() + device);
-        SerialDeviceManager.getSingletonInstance().dumpDevices();
+        System.out.println("--- Device Detached: " + device.getIdentifier() + device);
+        DeviceManager.getSingletonInstance().dumpDevices();
     }
 
     public DeviceSupervisor() {
         final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        SerialDeviceManager.getSingletonInstance().addListener(this);
+        DeviceManager.getSingletonInstance().addListener(this);
 
         final ScheduledFuture<?> scannerHandle = scheduler.scheduleAtFixedRate(this, 0 /*initialDelay*/, 20/*period*/, TimeUnit.SECONDS);
     }
@@ -33,7 +33,7 @@ public class DeviceSupervisor implements Runnable, SerialDeviceListenerIF {
 
     @Override
     public void run() {
-        System.out.println("alive ...");
-        SerialDeviceManager.getSingletonInstance().dumpDevices();
+        //        System.out.println("alive ...");
+        DeviceManager.getSingletonInstance().dumpDevices();
     }
 }

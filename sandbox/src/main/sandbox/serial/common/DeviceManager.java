@@ -3,27 +3,29 @@ package sandbox.serial.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import sandbox.serial.usb4java.DeviceScannerUsbImpl;
+import sandbox.serial.rxtx.DeviceDetectorRxTxImpl;
+import sandbox.serial.usb4java.DeviceDetectorUsbImpl;
 
-public class SerialDeviceManager implements DeviceScannerListenerIF {
+public class DeviceManager implements DeviceDetectorListenerIF {
     List<SerialDevice> devices = new ArrayList<SerialDevice>();
     List<SerialDeviceListenerIF> listeners = new ArrayList<SerialDeviceListenerIF>();
 
-    private volatile static SerialDeviceManager singletonInstance;
+    private volatile static DeviceManager singletonInstance;
 
-    public static SerialDeviceManager getSingletonInstance() {
+    public static DeviceManager getSingletonInstance() {
         if (null == singletonInstance) {
-            synchronized (SerialDeviceManager.class) {
+            synchronized (DeviceManager.class) {
                 if (null == singletonInstance) {
-                    singletonInstance = new SerialDeviceManager();
+                    singletonInstance = new DeviceManager();
                 }
             }
         }
         return singletonInstance;
     }
 
-    private SerialDeviceManager() {
-        DeviceScannerUsbImpl.getSingletonInstance().addListener(this);
+    private DeviceManager() {
+        DeviceDetectorUsbImpl.getSingletonInstance().addListener(this);
+        DeviceDetectorRxTxImpl.getSingletonInstance().addListener(this);
     }
 
     public void addListener(final SerialDeviceListenerIF listener) {
@@ -40,10 +42,8 @@ public class SerialDeviceManager implements DeviceScannerListenerIF {
     @Override
     public void deviceAttached(final SerialDevice device) {
         for (final SerialDeviceListenerIF listener : listeners) {
-            if (device.getIdentifier().startsWith("GANTNER") || device.getIdentifier().startsWith("FTDI")) {
                 devices.add(device);
                 listener.deviceAttached(device);
-            }
         }
     }
 
