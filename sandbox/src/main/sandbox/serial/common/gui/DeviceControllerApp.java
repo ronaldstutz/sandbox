@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import sandbox.serial.common.DeviceManager;
 import sandbox.serial.common.SerialDevice;
 import sandbox.serial.common.SerialDeviceListenerIF;
-import sandbox.serial.common.gui.model.Device;
+import sandbox.serial.common.gui.model.DeviceVM;
 import sandbox.serial.common.gui.view.DeviceOverviewController;
 
 public class DeviceControllerApp extends Application implements SerialDeviceListenerIF {
@@ -25,7 +25,7 @@ public class DeviceControllerApp extends Application implements SerialDeviceList
     /**
      * The data as an observable list of Devices.
      */
-    private final ObservableList<Device> allDeviceDataList = FXCollections.observableArrayList();
+    private final ObservableList<DeviceVM> allDeviceDataList = FXCollections.observableArrayList();
 
     /**
      * Constructor
@@ -41,7 +41,7 @@ public class DeviceControllerApp extends Application implements SerialDeviceList
 	/**
      * @return Returns the data as an observable list of Devices
      */
-    public ObservableList<Device> getAllDeviceDataList() {
+    public ObservableList<DeviceVM> getAllDeviceDataList() {
         return allDeviceDataList;
     }
 
@@ -65,6 +65,7 @@ public class DeviceControllerApp extends Application implements SerialDeviceList
     @Override
     public void stop() throws Exception {
         //        deviceController.stop();
+        DeviceManager.getSingletonInstance().removeListener(this);
         super.stop();
     }
 
@@ -118,20 +119,20 @@ public class DeviceControllerApp extends Application implements SerialDeviceList
 
     @Override
     public void deviceAttached(final SerialDevice serialDevice) {
-        for (final Device device : allDeviceDataList) {
-            if (device.getName().equalsIgnoreCase(serialDevice.getIdentifier())) {
+        for (final DeviceVM device : allDeviceDataList) {
+            if (device.getidentifier().equalsIgnoreCase(serialDevice.getIdentifier())) {
                 device.setAvailable(true);
                 return;
             }
         }
 
-        allDeviceDataList.add(new Device(serialDevice.getIdentifier(), true, false));
+        allDeviceDataList.add(new DeviceVM(serialDevice.getIdentifier(), true, "n/a", "n/a", serialDevice.toJsonString()));
     }
 
     @Override
     public void deviceDetached(final SerialDevice serialDevice) {
-        for (final Device device : allDeviceDataList) {
-            if (device.getName().equalsIgnoreCase(serialDevice.getIdentifier())) {
+        for (final DeviceVM device : allDeviceDataList) {
+            if (device.getidentifier().equalsIgnoreCase(serialDevice.getIdentifier())) {
                 device.setAvailable(false);
                 return;
             }

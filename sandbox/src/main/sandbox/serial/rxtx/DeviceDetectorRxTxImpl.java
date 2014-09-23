@@ -60,6 +60,7 @@ public class DeviceDetectorRxTxImpl extends AbstractDeviceDetector implements Ru
                 //                System.out.println("device " + attachedDevicesMap.get(portName) + " still connected");
             }
         }
+
         for (final String portName : detachedPortNames) {
             deviceDetached(portName);
         }
@@ -73,12 +74,14 @@ public class DeviceDetectorRxTxImpl extends AbstractDeviceDetector implements Ru
 
     private void deviceAttached(final String portName) {
         final SerialDevice device = new SerialDevice(portName);
+        device.setAttached(true);
         attachedDevicesMap.put(portName, device);
         super.deviceAttached(device);
     }
 
     private void deviceDetached(final String portName) {
         final SerialDevice device = attachedDevicesMap.remove(portName);
+        device.setAttached(false);
         super.deviceDetached(device);
     }
 
