@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/7/trunk/src/commons/json
+END
+JsonObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/src/commons/json/JsonObject.java
+END
+JsonString.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/src/commons/json/JsonString.java
+END
+JsonNumber.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/9/trunk/src/commons/json/JsonNumber.java
+END
+JsonSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/9/trunk/src/commons/json/JsonSerializer.java
+END
+JsonNull.java
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/9/trunk/src/commons/json/JsonNull.java
+END
+Reflector.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/src/commons/json/Reflector.java
+END
+JsonException.java
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/9/trunk/src/commons/json/JsonException.java
+END
+JsonArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/src/commons/json/JsonArray.java
+END
+Json.java
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/9/trunk/src/commons/json/Json.java
+END
+JsonAware.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/9/trunk/src/commons/json/JsonAware.java
+END
+JsonBoolean.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/9/trunk/src/commons/json/JsonBoolean.java
+END
+JsonDeserializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/9/trunk/src/commons/json/JsonDeserializer.java
+END

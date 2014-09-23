@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/8/trunk/src/commons/json/cache
+END
+Cache.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/8/trunk/src/commons/json/cache/Cache.java
+END
+LinkedHashMapCacheProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/8/trunk/src/commons/json/cache/LinkedHashMapCacheProvider.java
+END
+CacheProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/8/trunk/src/commons/json/cache/CacheProvider.java
+END
